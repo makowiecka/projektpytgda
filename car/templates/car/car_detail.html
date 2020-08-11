@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% block body %}
+
+    {{ object.brand }}
+    <br>
+    <br>
+    <a href="{% url 'rent' object.id %}"><button type="submit" class="btn btn-outline-primary mb-4">Wybierz datę wyporzyczenia</button></a>
+    <br>
+    <br>
+    <img src="{{ object.image.url }}">
+{#    {{ object.image }}#}
+
+{% endblock %}

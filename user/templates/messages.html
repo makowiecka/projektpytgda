@@ -1,0 +1,10 @@
+{% if messages %}
+    {% for message in messages %}
+        <div>
+            {% autoescape off %}
+                {{ message.tags|capfirst}} {{ message}}
+            {% endautoescape %}
+        </div>
+    {% endfor %}
+
+{% endif %}

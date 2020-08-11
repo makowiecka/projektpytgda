@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+
+
+{% block body %}
+    {% include 'messages.html' %}
+<!--    {% if user.is_authenticated %}-->
+<!--        wyloguj-->
+<!--    {% endif %}-->
+
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form | crispy }}
+        <input type="submit" value="zaloguj">
+    </form>
+{% endblock %}

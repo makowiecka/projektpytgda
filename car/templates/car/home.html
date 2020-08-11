@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{#{% load crispy_forms_filters %}#}
+
+{% block body %}
+    {% include 'messages.html' %}
+
+    <form method="get">
+        <ul class="list-group list-group-horizontal">
+            {{ filterset.form.as_p}}
+{#            <button type="submit" class="btn btn-primary btn-sm">szukaj</button>#}
+        </ul>
+        <button type="submit" class="btn btn-outline-primary mb-4" >szukaj</button>
+    </form>
+    <ul>
+        {% for object in object_list %}
+        <li class="list-group-item">
+            {{ object.production_year }}
+            <br>
+            {{ object.brand}}
+            <br>
+{#            <a href="{% url 'car-detail' object.id %}">{{ object.model}}</a>#}
+            {{ object.model}}
+            <br>
+            {{ object.status }}
+            <br>
+            <a href="{% url 'car-detail' object.id %}">Szczegóły</a>
+            <br>
+{#            <a href="{% url 'rent'%}">Wypożycz</a>#}
+
+        </li>
+        {% endfor %}
+    </ul>
+
+    {% load car_tags %}
+
+    {% if is_paginated %}
+      {% if page_obj.has_previous %}
+        <a href="?{% param_replace page=1 %}">First</a>
+        {% if page_obj.previous_page_number != 1 %}
+          <a href="?{% param_replace page=page_obj.previous_page_number %}">Previous</a>
+        {% endif %}
+      {% endif %}
+
+      Page {{ page_obj.number }} of {{ paginator.num_pages }}
+
+      {% if page_obj.has_next %}
+        {% if page_obj.next_page_number != paginator.num_pages %}
+          <a href="?{% param_replace page=page_obj.next_page_number %}">Next</a>
+        {% endif %}
+        <a href="?{% param_replace page=paginator.num_pages %}">Last</a>
+      {% endif %}
+
+      <p>Objects {{ page_obj.start_index }}—{{ page_obj.end_index }}</p>
+    {% endif %}
+{% endblock %}
